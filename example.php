@@ -1,4 +1,8 @@
 <?php
+// (C) Catchoom Technologies S.L.
+// Licensed under the MIT license.
+// https://github.com/catchoom/catchoom-php/blob/master/LICENSE
+// All warranties and liabilities are disclaimed.
 
 // include Catchoom API libraries
 include("lib/CatchoomRecognition.php");
@@ -37,11 +41,11 @@ $image = $response->getBody();
 
 // Now you are ready to perform the visual recognition against your collection.
 //
-// Note thet Before performing a successful recognition, the corresponding reference image
+// Note that before performing a successful recognition, the corresponding reference image
 // needs to be fully indexed by the server. Normally it takes less than one second after uploading.
 sleep(1);
 
-// Instatntiate a new Catchoom Recognition obejct
+// Instatntiate a new Catchoom Recognition object
 $catchoomRecognition = new CatchoomRecognition(CatchoomRecognition::API_VERSION_0, $token);
 
 //perform the search

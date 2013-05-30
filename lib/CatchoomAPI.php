@@ -1,4 +1,8 @@
 <?php
+// (C) Catchoom Technologies S.L.
+// Licensed under the MIT license.
+// https://github.com/catchoom/catchoom-php/blob/master/LICENSE
+// All warranties and liabilities are disclaimed.
 
 require("CatchoomAPIResponse.php");
 
