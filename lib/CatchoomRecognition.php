@@ -9,6 +9,7 @@ require_once("CatchoomAPI.php");
 class CatchoomRecognition extends CatchoomAPI{
 
     const API_VERSION_0 = "v0";
+    const API_VERSION_1 = "v1";
 
     private $token;
     private $apiVersion;
@@ -20,12 +21,10 @@ class CatchoomRecognition extends CatchoomAPI{
         $this->host = $host;
     }
 
-    public function search($queryImage){
+    public function search($queryImage, $options = array()){
         $url = "{$this->host}/{$this->apiVersion}/search";
         $data= array('token' => $this->token, 'image' => "@$queryImage");
-
-        return $this->multipartPost($url, $data);
-
+        return $this->multipartPost($url, array_merge($data, $options));
     }
 
 
