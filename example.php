@@ -9,7 +9,7 @@ include("lib/CatchoomRecognition.php");
 include("lib/CatchoomManagement.php");
 
 // use your own api_key!
-$apiKey = "602aeb90fddb74c29c46e0a9c8d8c0e15d71e09b";
+$apiKey = "use your own api_key!";
 
 //Instanciate new Catchoom management object with our api key
 $catchoomManagement = new CatchoomManagement(CatchoomManagement::API_VERSION_0, $apiKey);
@@ -46,11 +46,13 @@ $image = $response->getBody();
 sleep(1);
 
 // Instatntiate a new Catchoom Recognition object
-$catchoomRecognition = new CatchoomRecognition(CatchoomRecognition::API_VERSION_0, $token);
+$catchoomRecognition = new CatchoomRecognition(CatchoomRecognition::API_VERSION_1, $token);
 
 //perform the search
 echo "performing Imgage Recognition...\n";
-$response = $catchoomRecognition->search("./images/query/query_01.jpg");
+//optional arguments
+$options = array("embed_custom" => "true");
+$response = $catchoomRecognition->search("./images/query/query_01.jpg", $options);
 
 // pretty print search results
 echo "Response:\n\n";
