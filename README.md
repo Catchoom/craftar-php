@@ -9,11 +9,11 @@ and services.
 
 This client library provides access to CRS APIs:
 - [Catchoom Recognition API]
-(http://support.catchoom.com/customer/portal/articles/796840-recognition-api)
+(http://catchoom.com/documentation/api/recognition/)
   allows image recognition against one of your _collections_ of reference
   _images_ specified using the collection _token_.
 - [Catchoom Management API]
-(http://support.catchoom.com/customer/portal/articles/982312-management-api)
+(http://catchoom.com/documentation/api/management/)
   allows upload and management of _collections_ of reference _images_.
   All requests must be authenticated using your management api key.
 

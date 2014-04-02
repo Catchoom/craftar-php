@@ -30,6 +30,9 @@ $url = "http://catchoom.com"; // and your own url
 $custom = "This is my custom data"; // and your own custom data
 $optionalData = array("url" => $url, "custom" => $custom);
 
+// to create trackable items ( AR Items )
+// $optionalData["tracking"] = true
+
 echo "creating item...\n";
 $response = $catchoomManagement->createItem($collection->uuid, $name, $optionalData);
 $item = $response->getBody();
@@ -48,10 +51,18 @@ sleep(1);
 // Instatntiate a new Catchoom Recognition object
 $catchoomRecognition = new CatchoomRecognition(CatchoomRecognition::API_VERSION_1, $token);
 
-//perform the search
+// perform the search
 echo "performing Imgage Recognition...\n";
-//optional arguments
-$options = array("embed_custom" => "true");
+
+// optional arguments
+$options = array();
+
+// to retrieve custom data embeded uncomment the option below
+// $options["embed_custom"] "true";
+
+// to retrieve tracking info embeded uncomment the option below
+// $options = array("embed_tracking" => "true");
+
 $response = $catchoomRecognition->search("./images/query/query_01.jpg", $options);
 
 // pretty print search results
