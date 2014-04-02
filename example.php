@@ -31,7 +31,7 @@ $custom = "This is my custom data"; // and your own custom data
 $optionalData = array("url" => $url, "custom" => $custom);
 
 // to create trackable items ( AR Items )
-// $optionalData["tracking"] = true
+// $optionalData["tracking"] = "true";
 
 echo "creating item...\n";
 $response = $catchoomManagement->createItem($collection->uuid, $name, $optionalData);
@@ -58,7 +58,7 @@ echo "performing Imgage Recognition...\n";
 $options = array();
 
 // to retrieve custom data embeded uncomment the option below
-// $options["embed_custom"] "true";
+// $options["embed_custom"] = "true";
 
 // to retrieve tracking info embeded uncomment the option below
 // $options = array("embed_tracking" => "true");
