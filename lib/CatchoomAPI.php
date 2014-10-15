@@ -21,8 +21,7 @@ abstract class CatchoomAPI{
 
     private function setCommonOptions($request){
         curl_setopt($request, CURLOPT_PORT , 443);
-        curl_setopt($request, CURLOPT_SSLVERSION, 3);
-        curl_setopt($request, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($request, CURLOPT_SSL_VERIFYPEER, true);
         curl_setopt($request, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($request, CURLOPT_HEADER, true);
     }
