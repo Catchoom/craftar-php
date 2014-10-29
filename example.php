@@ -1,27 +1,30 @@
 <?php
 // (C) Catchoom Technologies S.L.
 // Licensed under the MIT license.
-// https://github.com/catchoom/catchoom-php/blob/master/LICENSE
+// https://github.com/Catchoom/craftar-php/blob/master/LICENSE
 // All warranties and liabilities are disclaimed.
 
-// include Catchoom API libraries
-include("lib/CatchoomRecognition.php");
-include("lib/CatchoomManagement.php");
+// include Craftar libraries
+include("craftar/Recognition.php");
+include("craftar/Management.php");
+
+use craftar\Management;
+use craftar\Recognition;
 
 // use your own api_key!
-$apiKey = "use your own api_key!";
+$apiKey = "8c50ccb8a93ae6cd2da78e826fe9e08e6151e077";
 
-//Instanciate new Catchoom management object with our api key
-$catchoomManagement = new CatchoomManagement(CatchoomManagement::API_VERSION_0, $apiKey);
+//Instanciate new management object with our api key
+$management = new Management(Management::API_VERSION_0, $apiKey);
 
 // Create a new collection
 echo "Creating collection...\n";
-$response = $catchoomManagement->createCollection("My cool collection");
+$response = $management->createCollection("My cool collection");
 $collection = $response->getBody();
 
 // A token is created automagically when creating a new collection
 // We are going to retrive this token for use in later in the recognition
-$response = $catchoomManagement->getTokenListByCollection($collection->uuid);
+$response = $management->getTokenListByCollection($collection->uuid);
 $token = $response->getBody()->objects[0]->token;
 
 // Create an empty item in your collection:
@@ -34,12 +37,12 @@ $optionalData = array("url" => $url, "custom" => $custom);
 // $optionalData["tracking"] = "true";
 
 echo "creating item...\n";
-$response = $catchoomManagement->createItem($collection->uuid, $name, $optionalData);
+$response = $management->createItem($collection->uuid, $name, $optionalData);
 $item = $response->getBody();
 
 // Upload an image representing your item.
 echo "Uploading reference image...\n";
-$response = $catchoomManagement->createImage($item->uuid, "./images/reference/catchy.jpg");
+$response = $management->createImage($item->uuid, "./images/reference/Shopping-cart.png");
 $image = $response->getBody();
 
 // Now you are ready to perform the visual recognition against your collection.
@@ -48,8 +51,8 @@ $image = $response->getBody();
 // needs to be fully indexed by the server. Normally it takes less than one second after uploading.
 sleep(1);
 
-// Instatntiate a new Catchoom Recognition object
-$catchoomRecognition = new CatchoomRecognition(CatchoomRecognition::API_VERSION_1, $token);
+// Instatntiate a new Recognition object
+$recognition = new Recognition(Recognition::API_VERSION_1, $token);
 
 // perform the search
 echo "performing Imgage Recognition...\n";
@@ -63,7 +66,7 @@ $options = array();
 // to retrieve tracking info embeded uncomment the option below
 // $options = array("embed_tracking" => "true");
 
-$response = $catchoomRecognition->search("./images/query/query_01.jpg", $options);
+$response = $recognition->search("./images/query/Shopping-cart.png", $options);
 
 // pretty print search results
 echo "Response:\n\n";

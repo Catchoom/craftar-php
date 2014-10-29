@@ -24,7 +24,7 @@ This client library provides access to CraftAR APIs:
 
 ## Dependencies
 
-- PHP >= 5
+- PHP >= 5.3
 - [PHP-cURL](http://php.net/manual/es/book.curl.php)
 
 ## Quick Start

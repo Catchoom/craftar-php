@@ -1,12 +1,14 @@
 <?php
 // (C) Catchoom Technologies S.L.
 // Licensed under the MIT license.
-// https://github.com/catchoom/catchoom-php/blob/master/LICENSE
+// https://github.com/Catchoom/craftar-php/blob/master/LICENSE
 // All warranties and liabilities are disclaimed.
 
-require_once("CatchoomAPI.php");
+namespace craftar;
 
-class CatchoomManagement extends CatchoomAPI{
+require_once("Request.php");
+
+class Management extends Request{
 
     const API_VERSION_0 = "v0";
 

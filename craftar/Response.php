@@ -1,10 +1,12 @@
 <?php
 // (C) Catchoom Technologies S.L.
 // Licensed under the MIT license.
-// https://github.com/catchoom/catchoom-php/blob/master/LICENSE
+// https://github.com/Catchoom/craftar-php/blob/master/LICENSE
 // All warranties and liabilities are disclaimed.
 
-class CatchoomAPIResponse{
+namespace craftar;
+
+class Response{
 
     private $rawResponse;
     private $status;

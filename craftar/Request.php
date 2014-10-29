@@ -1,13 +1,14 @@
 <?php
 // (C) Catchoom Technologies S.L.
 // Licensed under the MIT license.
-// https://github.com/catchoom/catchoom-php/blob/master/LICENSE
+// https://github.com/Catchoom/craftar-php/blob/master/LICENSE
 // All warranties and liabilities are disclaimed.
 
-require("CatchoomAPIResponse.php");
+namespace craftar;
 
-abstract class CatchoomAPI{
+require("Response.php");
 
+class Request{
 
     private function parseResponse($response, $request){
 
@@ -16,7 +17,7 @@ abstract class CatchoomAPI{
         $header = substr($response, 0, $header_size);
         $body = substr($response, $header_size);
 
-        return new CatchoomAPIResponse($response,$status,$header,$body);
+        return new Response($response,$status,$header,$body);
     }
 
     private function setCommonOptions($request){
