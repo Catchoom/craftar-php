@@ -34,5 +34,5 @@ See the example.php file
 ## Reporting Issues
 
 If you have suggestions, bugs or other issues specific to this library, file
-them [here](https://github.com/Catchoom/catchoom-php/issues) or contact us
+them [here](https://github.com/Catchoom/craftar-php/issues) or contact us
 at [support@catchoom.com](mailto:support@catchoom.com).
