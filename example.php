@@ -55,7 +55,7 @@ sleep(1);
 $recognition = new Recognition(Recognition::API_VERSION_1, $token);
 
 // perform the search
-echo "performing Imgage Recognition...\n";
+echo "performing Image Recognition...\n";
 
 // optional arguments
 $options = array();
