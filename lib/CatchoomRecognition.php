@@ -15,7 +15,7 @@ class CatchoomRecognition extends CatchoomAPI{
     private $apiVersion;
     private $host;
 
-    public function __construct($apiVersion, $token, $host = 'https://r.catchoom.com'){
+    public function __construct($apiVersion, $token, $host = 'https://search.craftar.net'){
         $this->token = $token;
         $this->apiVersion = $apiVersion;
         $this->host = $host;

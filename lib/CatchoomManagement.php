@@ -14,7 +14,7 @@ class CatchoomManagement extends CatchoomAPI{
     private $apiKey;
     private $host;
 
-    public function __construct($apiVersion, $apiKey, $host = "https://crs.catchoom.com"){
+    public function __construct($apiVersion, $apiKey, $host = "https://my.craftar.net"){
         $this->apiVersion = $apiVersion;
         $this->apiKey = $apiKey;
         $this->host = $host;
