@@ -24,6 +24,7 @@ abstract class CatchoomAPI{
         curl_setopt($request, CURLOPT_SSL_VERIFYPEER, true);
         curl_setopt($request, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($request, CURLOPT_HEADER, true);
+        curl_setopt($request, CURLOPT_USERAGENT, 'CraftAR PHP 1.0 ( PHP '.phpversion().')');
     }
 
     protected function multipartPost($url, $data){
