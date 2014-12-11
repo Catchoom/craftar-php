@@ -147,7 +147,7 @@ class Management extends Request{
             "image",
             array(
                 "item" => $this->buildResourceUri("item", $itemUuid),
-                "file" => "@$imageFile"
+                "file" => $this->file_create($imageFile)
             )
         );
     }
