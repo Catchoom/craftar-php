@@ -25,7 +25,7 @@ class Recognition extends Request{
 
     public function search($queryImage, $options = array()){
         $url = "{$this->host}/{$this->apiVersion}/search";
-        $data= array('token' => $this->token, 'image' => "@$queryImage");
+        $data= array('token' => $this->token, 'image' => $this->file_create($queryImage));
         return $this->multipartPost($url, array_merge($data, $options));
     }
 
