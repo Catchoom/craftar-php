@@ -38,6 +38,10 @@ class Request{
         $this->setCommonOptions($request);
 
         $response = curl_exec($request);
+        if(curl_errno($request) != 0) {
+            echo "ERROR calling API: ", curl_error($request), "\n";
+        }
+
         $result = $this->parseResponse($response, $request);
         curl_close($request);
 
@@ -78,6 +82,9 @@ class Request{
         $this->setCommonOptions($request);
 
         $response = curl_exec($request);
+        if(curl_errno($request) != 0) {
+            echo "ERROR calling API: ", curl_error($request), "\n";
+        }
         $result = $this->parseResponse($response, $request);
         curl_close($request);
 
