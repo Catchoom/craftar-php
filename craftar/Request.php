@@ -101,8 +101,7 @@ class Request{
     }
 
     protected function file_create($filename){
-        $version = explode('.', PHP_VERSION);
-        if ($version[0] >= 5 && $version[1] >= 5){
+        if (version_compare(PHP_VERSION, '5.5', '>=')){
             return curl_file_create($filename);
         } else {
             return "@$filename";
