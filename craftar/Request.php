@@ -23,6 +23,7 @@ class Request{
     private function setCommonOptions($request){
         curl_setopt($request, CURLOPT_PORT , 443);
         curl_setopt($request, CURLOPT_SSL_VERIFYPEER, true);
+        curl_setopt($request, CURLOPT_SSLVERSION, CURL_SSLVERSION_TLSv1_2);
         curl_setopt($request, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($request, CURLOPT_HEADER, true);
         curl_setopt($request, CURLOPT_USERAGENT, 'CraftAR PHP 1.0 ( PHP '.phpversion().')');
