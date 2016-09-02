@@ -37,7 +37,7 @@ You can install the library using [Composer](https://getcomposer.org/) and it wi
 check the dependencies and load the classes when used in your code. Just run:
 
 ``` sh
-composer require "catchoom/craftar-php" "dev-master"
+composer require "catchoom/craftar-php"
 ```
 
 ## Reporting Issues
