@@ -31,6 +31,15 @@ This client library provides access to CraftAR APIs:
 
 See the example.php file
 
+## Installation
+
+You can install the library using [Composer](https://getcomposer.org/) and it will automatically download the library,
+check the dependencies and load the classes when used in your code. Just run:
+
+``` sh
+composer require "catchoom/craftar-php" "dev-master"
+```
+
 ## Reporting Issues
 
 If you have suggestions, bugs or other issues specific to this library, file
