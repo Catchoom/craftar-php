@@ -74,7 +74,7 @@ class Request{
         $request = curl_init($url);
         curl_setopt($request, CURLOPT_POST, 1);
         curl_setopt($request, CURLOPT_HTTPHEADER, array('Content-type: application/json'));
-        curl_setopt($request, CURLOPT_POSTFIELDS, json_encode($data));
+        curl_setopt($request, CURLOPT_POSTFIELDS, json_encode($data, JSON_FORCE_OBJECT));
 
         $this->setCommonOptions($request);
 
@@ -90,7 +90,7 @@ class Request{
 
         curl_setopt($request, CURLOPT_CUSTOMREQUEST, "PUT");
         curl_setopt($request, CURLOPT_HTTPHEADER, array('Content-type: application/json'));
-        curl_setopt($request, CURLOPT_POSTFIELDS, json_encode($data));
+        curl_setopt($request, CURLOPT_POSTFIELDS, json_encode($data, JSON_FORCE_OBJECT));
 
         $this->setCommonOptions($request);
 

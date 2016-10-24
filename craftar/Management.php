@@ -103,8 +103,8 @@ class Management extends Request{
         return $this->getObjectList("item", null, $limit, $offset);
     }
 
-    public function getItemListByCollection($collectionUUid, $limit = null, $offset = null){
-        return $this->getObjectList("item", $collectionUUid, $limit, $offset);
+    public function getItemListByCollection($collectionUuid, $limit = null, $offset = null){
+        return $this->getObjectList("item", $collectionUuid, $limit, $offset);
     }
 
     public function getItem($uuid){
@@ -160,24 +160,155 @@ class Management extends Request{
         return $this->getObjectList("token", null, $limit, $offset);
     }
 
-    public function getTokenListByCollection($collectionUUid, $limit = null, $offset = null){
-        return $this->getObjectList("token", $collectionUUid, $limit, $offset);
+    public function getTokenListByCollection($collectionUuid, $limit = null, $offset = null){
+        return $this->getObjectList("token", $collectionUuid, $limit, $offset);
     }
 
     public function getToken($uuid){
         return $this->getObject("token", $uuid);
     }
 
-    public function createToken($collectionUuid){
-        return $this->createObject(
-            "token",
-            array(
-                "collection" => $this->buildResourceUri("collection", $collectionUuid),
-            )
+    public function createToken($collectionUuid, $tags = null){
+        $data = array(
+          "collection" => $this->buildResourceUri("collection", $collectionUuid),
         );
+
+        if( $tags != null ){
+            $data['tags'] = array_map(
+              function($uuid){
+                  return $this->buildResourceUri("tag", $uuid);
+              },
+              $tags
+            );
+        }
+
+        return $this->createObject("token", $data);
+    }
+
+    public function updateToken($uuid, $tags = null){
+        $data = array();
+
+        if( $tags != null ){
+            $data['tags'] = array_map(
+              function($uuid){
+                  return $this->buildResourceUri("tag", $uuid);
+              },
+              $tags
+            );
+        }
+
+        return $this->updateObject("token", $uuid, $data);
     }
 
     public function deleteToken($uuid){
         return $this->deleteObject("token", $uuid);
+    }
+
+    public function getMediaList($limit = null, $offset = null){
+        return $this->getObjectList("media", null, $limit, $offset);
+    }
+
+    public function getMedia($uuid){
+        return $this->getObject("media", $uuid);
+    }
+
+    public function createMedia($mediaFile){
+        return $this->createObjectMultipart(
+            "media",
+            array(
+                "file" => $this->file_create($mediaFile)
+            )
+        );
+    }
+
+    public function deleteMedia($uuid){
+        return $this->deleteObject("media", $uuid);
+    }
+
+    public function getTagList($limit = null, $offset = null){
+        return $this->getObjectList("tag", null, $limit, $offset);
+    }
+
+    public function getTagListByCollection($collectionUuid, $limit = null, $offset = null){
+        return $this->getObjectList("tag", $collectionUuid, $limit, $offset);
+    }
+
+    public function getTag($uuid){
+        return $this->getObject("tag", $uuid);
+    }
+
+    public function createTag($collectionUuid, $name){
+        return $this->createObject(
+          "tag",
+          array(
+            "collection" => $this->buildResourceUri("collection", $collectionUuid),
+            "name" => $name
+          )
+        );
+    }
+
+    public function deleteTag($uuid){
+        return $this->deleteObject("tag", $uuid);
+    }
+
+    public function getAppList($limit = null, $offset = null){
+        return $this->getObjectList("app", null, $limit, $offset);
+    }
+
+    public function getApp($uuid){
+        return $this->getObject("app", $uuid);
+    }
+
+    public function createApp($collectionUuid, $name){
+        return $this->createObject(
+          "app",
+          array(
+            "collection" => $this->buildResourceUri("collection", $collectionUuid),
+            "name" => $name
+          )
+        );
+    }
+
+    public function deleteApp($uuid){
+        return $this->deleteObject("app", $uuid);
+    }
+
+    public function getVersionList($limit = null, $offset = null){
+        return $this->getObjectList("version", null, $limit, $offset);
+    }
+
+    public function getVersion($uuid){
+        return $this->getObject("version", $uuid);
+    }
+
+    public function getBundleList($limit = null, $offset = null){
+        return $this->getObjectList("collectionbundle", $limit, $offset);
+    }
+
+    public function getBundle($uuid){
+        return $this->getObject("collectionbundle", $uuid);
+    }
+
+    public function createBundle($collectionUUid, $appUuid, $versionUuid, $tagUuid = null){
+        $data = array(
+          "collection" => $collectionUUid,
+          "version" => $versionUuid,
+          "app" => $appUuid
+        );
+        if($tagUuid != null){
+            $data = array_merge($data, array("tag" => $tagUuid));
+        }
+        foreach( $data as $objectType => $uuid ){
+            $data[$objectType] = $this->buildResourceUri($objectType, $uuid);
+        }
+
+        return $this->createObject(
+          "collectionbundle",
+          $data
+        );
+    }
+
+    public function deleteBundle($uuid){
+        return $this->deleteObject("collectionbundle", $uuid);
     }
 }
