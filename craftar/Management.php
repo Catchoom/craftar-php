@@ -221,6 +221,21 @@ class Management extends Request{
         );
     }
 
+    public function createVideoMedia($url, $name = null){
+        if ( $name == null ){
+            $name = basename($url);
+        }
+
+        return $this->createObject(
+            "media",
+            array(
+              "name" => $name,
+              "mimetype" => "video",
+              "meta" => (object)['video-url' => $url]
+            )
+        );
+    }
+
     public function deleteMedia($uuid){
         return $this->deleteObject("media", $uuid);
     }
