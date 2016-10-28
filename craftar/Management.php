@@ -186,7 +186,7 @@ class Management extends Request{
     }
 
     public function updateToken($uuid, $tags = null){
-        $data = array();
+        $data = (object)array();
 
         if( $tags != null ){
             $data['tags'] = array_map(
