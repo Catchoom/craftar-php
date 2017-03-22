@@ -38,7 +38,7 @@ class Management extends Request{
         return $url;
     }
 
-    private function getObjectList($objectType, $filter, $limit = null, $offset = null){
+    private function getObjectList($objectType, $filter, $limit = null, $offset = null, $filter_type = null){
         $url = $this->buildUrl($objectType);
         if ($limit != null)
             $url .= "&limit=$limit";
@@ -47,8 +47,15 @@ class Management extends Request{
         if ($filter != null){
             if ($objectType == "item" || $objectType == "token"){
                 $url .= "&collection__uuid=$filter";
-            }elseif ($objectType == "image"){
-                $url .= "&item__uuid=$filter";
+            }
+            elseif ($objectType == "image"){
+                if($filter_type != null){
+                    
+                    $url .= "&collection__uuid=$filter";
+                }
+                else{
+                     $url .= "&item__uuid=$filter";
+                }
             }
         }
         return $this->get($url);
@@ -136,6 +143,10 @@ class Management extends Request{
 
     public function getImageListByItem($itemUUid, $limit = null, $offset = null){
         return $this->getObjectList("image", $itemUUid, $limit, $offset);
+    }
+
+    public function getImageListByCollection($collectionUUid, $limit = null, $offset = null){
+        return $this->getObjectList("image", $collectionUUid, $limit, $offset, 'collection');
     }
 
     public function getImage($uuid){
