@@ -38,7 +38,7 @@ class Management extends Request{
         return $url;
     }
 
-    private function getObjectList($objectType, $filter, $limit = null, $offset = null){
+    private function getObjectList($objectType, $filter, $limit = null, $offset = null, $filtersDict = null){
         $url = $this->buildUrl($objectType);
         if ($limit != null)
             $url .= "&limit=$limit";
@@ -49,6 +49,11 @@ class Management extends Request{
                 $url .= "&collection__uuid=$filter";
             }elseif ($objectType == "image"){
                 $url .= "&item__uuid=$filter";
+            }
+        }
+        if ($filtersDict != null){
+            foreach ($filtersDict as $key => $value){
+                $url .= "&$key=$value";
             }
         }
         return $this->get($url);
@@ -79,8 +84,8 @@ class Management extends Request{
         return $this->put($url, $data);
     }
 
-    public function getCollectionList($limit = null, $offset = null){
-        return $this->getObjectList("collection", null, $limit, $offset);
+    public function getCollectionList($limit = null, $offset = null, $filtersDict = null){
+        return $this->getObjectList("collection", null, $limit, $offset, $filtersDict);
     }
 
     public function getCollection($uuid){
@@ -99,8 +104,8 @@ class Management extends Request{
         return $this->updateObject("collection", $uuid, array("name" => $name));
     }
 
-    public function getItemList($limit = null, $offset = null){
-        return $this->getObjectList("item", null, $limit, $offset);
+    public function getItemList($limit = null, $offset = null, $filtersDict = null){
+        return $this->getObjectList("item", null, $limit, $offset, $filtersDict);
     }
 
     public function getItemListByCollection($collectionUuid, $limit = null, $offset = null){
@@ -130,12 +135,19 @@ class Management extends Request{
         return $this->deleteObject("item", $uuid);
     }
 
-    public function getImageList($limit = null, $offset = null){
-        return $this->getObjectList("image", null, $limit, $offset);
+    public function getImageList($limit = null, $offset = null, $filtersDict = null){
+        return $this->getObjectList("image", null, $limit, $offset, $filtersDict);
     }
 
     public function getImageListByItem($itemUUid, $limit = null, $offset = null){
         return $this->getObjectList("image", $itemUUid, $limit, $offset);
+    }
+
+    public function getImageListByCollection($collectionUUid, $limit = null, $offset = null){
+        return $this->getObjectList("image", null, $limit, $offset,
+                                    array(
+                                      "item__collection__uuid" => $collectionUUid
+                                    ));
     }
 
     public function getImage($uuid){
@@ -156,8 +168,8 @@ class Management extends Request{
         return $this->deleteObject("image", $uuid);
     }
 
-    public function getTokenList($limit = null, $offset = null){
-        return $this->getObjectList("token", null, $limit, $offset);
+    public function getTokenList($limit = null, $offset = null, $filtersDict = null){
+        return $this->getObjectList("token", null, $limit, $offset, $filtersDict);
     }
 
     public function getTokenListByCollection($collectionUuid, $limit = null, $offset = null){
@@ -204,8 +216,8 @@ class Management extends Request{
         return $this->deleteObject("token", $uuid);
     }
 
-    public function getMediaList($limit = null, $offset = null){
-        return $this->getObjectList("media", null, $limit, $offset);
+    public function getMediaList($limit = null, $offset = null, $filtersDict = null){
+        return $this->getObjectList("media", null, $limit, $offset, $filtersDict);
     }
 
     public function getMedia($uuid){
@@ -240,8 +252,8 @@ class Management extends Request{
         return $this->deleteObject("media", $uuid);
     }
 
-    public function getTagList($limit = null, $offset = null){
-        return $this->getObjectList("tag", null, $limit, $offset);
+    public function getTagList($limit = null, $offset = null, $filtersDict = null){
+        return $this->getObjectList("tag", null, $limit, $offset, $filtersDict);
     }
 
     public function getTagListByCollection($collectionUuid, $limit = null, $offset = null){
@@ -266,8 +278,8 @@ class Management extends Request{
         return $this->deleteObject("tag", $uuid);
     }
 
-    public function getAppList($limit = null, $offset = null){
-        return $this->getObjectList("app", null, $limit, $offset);
+    public function getAppList($limit = null, $offset = null, $filtersDict = null){
+        return $this->getObjectList("app", null, $limit, $offset, $filtersDict);
     }
 
     public function getApp($uuid){
@@ -288,16 +300,16 @@ class Management extends Request{
         return $this->deleteObject("app", $uuid);
     }
 
-    public function getVersionList($limit = null, $offset = null){
-        return $this->getObjectList("version", null, $limit, $offset);
+    public function getVersionList($limit = null, $offset = null, $filtersDict = null){
+        return $this->getObjectList("version", null, $limit, $offset, $filtersDict);
     }
 
     public function getVersion($uuid){
         return $this->getObject("version", $uuid);
     }
 
-    public function getBundleList($limit = null, $offset = null){
-        return $this->getObjectList("collectionbundle", $limit, $offset);
+    public function getBundleList($limit = null, $offset = null, $filtersDict = null){
+        return $this->getObjectList("collectionbundle", $limit, $offset, $filtersDict);
     }
 
     public function getBundle($uuid){
